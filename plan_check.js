@@ -91,9 +91,10 @@ function parsePdfToRaw(planname) {
     const pdfParser = new PDFParser();
     pdfParser.on("pdfParser_dataError", errData => Log.e(errData));
     pdfParser.on("pdfParser_dataReady", pdfData => {
-        fs.writeFile(properties.raw + planname + ".json", JSON.stringify(pdfData));
-        Log.i("parsed " + planname + ".pdf to json");
-        parseRawToJson(pdfData, planname);
+        fs.writeFile(properties.raw + planname + ".json", JSON.stringify(pdfData), function() {
+            Log.i("parsed " + planname + ".pdf to json");
+            parseRawToJson(pdfData, planname);
+        });
     });
     console.log(properties.pdf + planname + ".pdf");
     pdfParser.loadPDF(properties.pdf + planname + ".pdf");
