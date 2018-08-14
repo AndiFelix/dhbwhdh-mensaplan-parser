@@ -1,0 +1,9 @@
+{
+  "html": "./files/html/",
+  "food": "./files/json/",
+  "raw": "./files/raw/",
+  "pdf": "./files/pdf/",
+  "log": "./files/checker.log",
+  "basedomain": "https://studierendenwerk-ulm.de/wp-content/uploads/speiseplaene/"
+
+}
