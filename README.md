@@ -1,5 +1,5 @@
 # Mensaplan-Parser for DHBW Heidenheim Menus
-PDF Parser for the DHBW Heidenheim Menus (Studentenwerk Ulm)
+PDF Parser for the DHBW Heidenheim Menus (Studierendenwerk Ulm)
 
 ## 1. Installation
 
