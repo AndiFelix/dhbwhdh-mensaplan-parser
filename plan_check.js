@@ -1,22 +1,22 @@
 "use strict";
 const fs = require('fs');
-const url = require('url');
 const http = require('https');
 const PDFParser = require('pdf2json/pdfparser');
 const Log = require("./lib/log.js");
 const _ = require('underscore');
+const mkdirp = require('mkdirp');
 
 const properties = require('./properties.json');
 
 let parsecount = 0;
 let urls = [];
 
-const dirs = [properties.pdf, properties.food, properties.raw];
+const dirs = [properties.pdf, properties.food, properties.raw, properties.html];
 for (let dir in dirs) {
     try {
         fs.accessSync(dirs[dir], fs.R_OK | fs.W_OK)
     } catch (ex) {
-        fs.mkdirSync(dirs[dir]);
+        mkdirp.sync(dirs[dir]);
     }
 }
 const files = fs.readdirSync(properties.pdf);
@@ -41,7 +41,7 @@ function checkhtml() {
                 }
             });
 
-            if (urls.length == 0) {
+            if (urls.length === 0) {
                 Log.w("No plans found at the website!");
             }
             else {
@@ -50,7 +50,7 @@ function checkhtml() {
                     if (files.indexOf(element + ".pdf") > -1) {
                         Log.i(element + ".pdf existing -> try to find the .json file");
                         fs.readFile(properties.raw + element + ".json", "utf-8", (err, data2) => {
-                            if (err || data2.length == 0) {
+                            if (err || data2.length === 0) {
                                 Log.i("Not able to find " + properties.raw + element + ".json" + " -> Parse from .pdf ");
                                 parsePdfToRaw(element);
                             }
@@ -91,10 +91,9 @@ function parsePdfToRaw(planname) {
     const pdfParser = new PDFParser();
     pdfParser.on("pdfParser_dataError", errData => Log.e(errData));
     pdfParser.on("pdfParser_dataReady", pdfData => {
-        fs.writeFile(properties.raw + planname + ".json", JSON.stringify(pdfData), function() {
-            Log.i("parsed " + planname + ".pdf to json");
-            parseRawToJson(pdfData, planname);
-        });
+        fs.writeFileSync(properties.raw + planname + ".json", JSON.stringify(pdfData));
+        Log.i("parsed " + planname + ".pdf to json");
+        parseRawToJson(pdfData, planname);
     });
     console.log(properties.pdf + planname + ".pdf");
     pdfParser.loadPDF(properties.pdf + planname + ".pdf");
@@ -185,7 +184,7 @@ function parseRawToJson(json, planname) {
 function finish() {
     parsecount++;
     let addNew = false;
-    if (parsecount == urls.length) {
+    if (parsecount === urls.length) {
         Log.i("All plans parsed, look if they are new and write them if so");
         let existingarray = [];
         try {
