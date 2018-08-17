@@ -2,8 +2,10 @@
   "name": "mensahdh-parser",
   "version": "0.0.3",
   "description": "Parser for the DHBW HDH Mensaplan",
+  "private": true,
+  "license": "MIT",
+  "repository": "https://github.com/AndiFelix/dhbwhdh-mensaplan-parser",
   "scripts": {
-    "test": "mocha",
     "start": "node plan_check.js"
   },
   "dependencies": {
@@ -12,7 +14,5 @@
     "pdf2json": "^1.1.6",
     "underscore": "^1.8.3"
   },
-  "devDependencies": {
-    "chai": "^3.5.0"
-  }
+  "devDependencies": {}
 }
