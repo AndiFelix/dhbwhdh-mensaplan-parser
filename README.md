@@ -23,8 +23,13 @@ The parser can be configured via the `properties.json` file.
 It has the following keys:
 
 "html": The folder where the resulting json files for the api are put (out.json and weeks.json)
+
 "food": This is the folder where the parsed food plans for each week go
+
 "raw": This folder is for storing the original output of pdf2json
+
 "pdf": Here the original pdf files are stored
+
 "log": Location of a log file
+
 "basedomain": The base domain for the plans to be downloaded
