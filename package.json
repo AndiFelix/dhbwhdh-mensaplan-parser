@@ -11,7 +11,7 @@
   "dependencies": {
     "cheerio": "^0.22.0",
     "mkdirp": "^0.5.1",
-    "pdf2json": "^1.1.6",
+    "pdf2json": "^1.1.8",
     "underscore": "^1.8.3"
   },
   "devDependencies": {}
